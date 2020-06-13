@@ -109,11 +109,11 @@ class RadarModuleService {
       protocols.includes("assist-allies") ||
       protocols.includes("avoid-crossfire")
     ) {
-      const matchedProtocolo = protocols.find(
+      const matchedProtocol = protocols.find(
         (p) => p === "assist-allies" || p === "avoid-crossfire"
       )!;
 
-      switch (matchedProtocolo) {
+      switch (matchedProtocol) {
         case "assist-allies":
           _scan.sort((a, b) => {
             if (!a.allies) {
@@ -141,10 +141,10 @@ class RadarModuleService {
 
     // priority targets
     if (protocols.includes("prioritize-mech")) {
-      const matchedProtocolo = protocols.find((p) => p === "prioritize-mech")!;
+      const matchedProtocol = protocols.find((p) => p === "prioritize-mech")!;
 
       let matchedPriorityAttackCoords: COORDINATES | undefined;
-      switch (matchedProtocolo) {
+      switch (matchedProtocol) {
         case "prioritize-mech":
           matchedPriorityAttackCoords = _scan.find(
             (s) => s.enemies.type === "mech"
