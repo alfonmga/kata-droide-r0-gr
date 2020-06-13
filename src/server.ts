@@ -24,7 +24,7 @@ interface RadarModuleRequestData {
   scan: Array<VisionModuleScanData>;
 }
 
-// util function to calculate origin distance from Cartesian coordinate system
+// util function to calculate coordinates origin distance
 function d(x: number, y: number): number {
   return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 }
