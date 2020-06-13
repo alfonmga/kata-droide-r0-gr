@@ -30,6 +30,7 @@ function d(x: number, y: number): number {
 }
 
 class RadarModuleService {
+  private readonly MAX_ATTACK_RANGE_DISTANCE_IN_METERS = 100;
   processVision(
     res: express.Response,
     data: RadarModuleRequestData
@@ -95,7 +96,9 @@ class RadarModuleService {
 
       // max attack range is 100m so we filter unachievable coords
       const scanCoordsFilteredByMaxAttackRangeDistance = scanCoordsWithEnemiesSortedByMatchedProtocol.filter(
-        (s) => d(s.coordinates.x, s.coordinates.y) <= 100
+        (s) =>
+          d(s.coordinates.x, s.coordinates.y) <=
+          this.MAX_ATTACK_RANGE_DISTANCE_IN_METERS
       );
 
       attackCords = scanCoordsFilteredByMaxAttackRangeDistance[0].coordinates;
