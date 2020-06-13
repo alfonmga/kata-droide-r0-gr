@@ -24,7 +24,7 @@ interface RadarModuleRequestData {
   scan: Array<VisionModuleScanData>;
 }
 
-// calculate origin distance from xy
+// util function to calculate origin distance from Cartesian coordinate system
 function d(x: number, y: number): number {
   return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
 }
@@ -51,13 +51,13 @@ class RadarModuleService {
       protocols.includes("closest-enemies") ||
       protocols.includes("furthest-enemies")
     ) {
-      const matchedProtocolo = protocols.find(
+      const matchedProtocol = protocols.find(
         (p) => p === "closest-enemies" || p === "furthest-enemies"
       )!;
 
-      const scanCoordsWithEnemiesSortedByMatchedProtocolo = _scan.sort(
+      const scanCoordsWithEnemiesSortedByMatchedProtocol = _scan.sort(
         (a, b) => {
-          switch (matchedProtocolo) {
+          switch (matchedProtocol) {
             case "closest-enemies":
               if (
                 d(a.coordinates.x, a.coordinates.y) <
@@ -94,7 +94,7 @@ class RadarModuleService {
       );
 
       // max attack range is 100m so we filter unachievable coords
-      const scanCoordsFilteredByMaxAttackRangeDistance = scanCoordsWithEnemiesSortedByMatchedProtocolo.filter(
+      const scanCoordsFilteredByMaxAttackRangeDistance = scanCoordsWithEnemiesSortedByMatchedProtocol.filter(
         (s) => d(s.coordinates.x, s.coordinates.y) <= 100
       );
 
